@@ -1,38 +1,249 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#bg{
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  position: absolute;
+}
+body{
+  width: 100vw;
+  height: 100vh;
+}
+#root{
+  background-color: #dce1ea;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#container{
+  justify-content: space-around;
+  gap: 20px;
+  width: 280px;
+  height:300px;
+  display: flex;
+  flex-direction: column;
+}
+#container > input, #container > button {
+  padding: 8px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#ChatApp{
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  width: 100%;
+  height:100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#ChatApp > #Header{
+  position: relative;
+  height: 64px;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#ChatApp > #Main{
+  height: calc(100% - 64px);
+  display: flex;
+  width: 100%;
+}
+
+#ChatApp > #Main > #List{
+  height: 100%;
+  
+  width: 360px;
+}
+
+#ChatApp > #Main > #Chat{
+  height: 100%;
+  width: calc(100% - 360px)
+}
+
+.left{
+  top: 50%;
+  transform: translate(0,-50%);
+  position: absolute;
+  left: 12px;
+}
+
+.right{
+  top: 50%;
+  transform: translate(0,-50%);
+  position: absolute;
+  right: 12px;
+  z-index: 8;
+}
+.cp{
+  cursor: pointer;
+}
+#Search {
+  width: 100%;
+  padding: 12px;
+}
+
+#RoomList{
+  width: 100%;
+  height: calc(100% - 64px);
+  padding: 16px 16px 12px;
+  border-radius: 30px;
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: column;
+}
+.Chats{
+  width: 328px;
+  height: 64px;
+  display: flex;
+  gap: 12px;
+  /* overflow: hidden; */
+  position: relative;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.Chats:hover{
+  background-color: rgb(235, 235, 235);
+}
+.Chats > .ProfilePictures{
+  height: 48px;
+  width: 48px;
+  border-radius: 100%;
+  background-color: grey;
+}
+.Chats > .ChatsPreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#Chat{
+  min-width: 400px;
+  width: calc(100% - 360px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+#ChatContent{
+  width: calc(100% );
+  padding-right: 16px;
+  height: calc(100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: relative;
+}
+#ChatContent > #ChatHeader {
+  display:flex;
+  position: relative;
+  top: 0;
+  flex: none;
+  width: calc(100%);
+  left: 0;
+  padding: 12px 0;
+  height:64px;
+}
+#ChatContent > #ChatHeader > .ChatName {
+  cursor: pointer;
+  /* width: calc(100% - 52px); */
+  position: absolute;
+  font-weight: 670;
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  background-color: white;
+  border-radius: 30px;
+  align-items: center;
+}
+#ChatContent > #ChatHeader > .ChatSetting {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+}
+#ChatContent > #ChatContainer {
+  width: 100%;
+  border-radius: 15px;
+  background-color: white;
+  position: relative;
+  margin: 16px 0;
+  overflow-y: hidden;
+  padding: 12px;
+  height: calc(100% - 64px)
+}
+.Loading{
+  display: flex;
+  position: relative;
+  align-items: center;
+  transform: translate(0,-5%);
+  height: 100vh;
+}
+#SendMessage{
+  position: absolute;
+  bottom: 12px;
+  width: calc(100% - 24px);
+  left: 12px
+}
+#ChatList{
+  align-items: flex-start;
+  width: 100%;
+  height: calc(100% - 52px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+#ChatList::-webkit-scrollbar{
+  display: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Message{
+  align-items: flex-start;
+  max-width: 80%;
+  height: auto;
+  word-break:break-all;
+  word-wrap:normal;
+  overflow-wrap: break-word;
+  position: relative;
+  padding: 8px 12px;
+  overflow-wrap: break-word;
+  background-color: #dce1ea;
+  display: inline-block;
+  margin: 0 auto;
+  /* max-width: 80%; */
+}
+.Message::after{
+  display: inline;
+  white-space: nowrap;
+}
+.LeftChat {
+  position: relative;
+  transform: translateX(50%);
+  border-radius: 0 12px 12px;
+  right:50%;
+}
+.RightChat {
+  position: relative;
+  transform: translateX(-50%);
+  border-radius: 12px 0 12px 12px;
+  left: 50%;
+}
+.ic-right{
+  right: 24px;
+  position: absolute;
 }
